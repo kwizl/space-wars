@@ -1,0 +1,4 @@
+canvas {
+  margin-left: calc((100vw - 800) / 2);
+  margin-top: calc((100vh - 640) / 2);;
+}
