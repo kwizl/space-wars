@@ -7,7 +7,7 @@ export default class TitleScene extends Phaser.Scene {
     super('Title');
   }
 
-  create () {
+  create() {
     this.gameButton = new Button(this, config.width/2, config.height/2 - 100, 'blueButton1', 'blueButton2', 'Play', 'Game');
 
     this.optionsButton = new Button(this, config.width/2, config.height/2, 'blueButton1', 'blueButton2', 'Options', 'Options');
@@ -23,14 +23,14 @@ export default class TitleScene extends Phaser.Scene {
     }
   }
 
-  centerButton (gameObject, offset = 0) {
+  centerButton(gameObject, offset = 0) {
     Phaser.Display.Align.In.Center(
       gameObject,
       this.add.zone(config.width/2, config.height/2 - offset * 100, config.width, config.height)
     );
   }
 
-  centerButtonText (gameText, gameButton) {
+  centerButtonText(gameText, gameButton) {
     Phaser.Display.Align.In.Center(
       gameText,
       gameButton
