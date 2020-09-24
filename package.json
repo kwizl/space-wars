@@ -1,0 +1,30 @@
+{
+  "name": "space-shooter",
+  "version": "1.0.0",
+  "description": "This is a WEBGL space shooter game built using phaser3",
+  "main": "src/js/index.js",
+  "scripts": {
+    "build": "webpack",
+    "start": "npm run build && webpack-dev-server --port=8000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kwizl/space-shooter.git"
+  },
+  "author": "Martin Njoroge",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kwizl/space-shooter/issues"
+  },
+  "homepage": "https://github.com/kwizl/space-shooter#readme",
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "babel-loader": "^7.1.5",
+    "phaser": "^3.3.0",
+    "raw-loader": "^0.5.1",
+    "webpack": "^3.4.1",
+    "webpack-dev-server": "^2.11.0"
+  },
+  "dependencies": {}
+}
