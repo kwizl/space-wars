@@ -18,7 +18,7 @@ module.exports = {
         use: 'raw-loader'
       },
       {
-        test: /\.(png|jpe?g|gif|tga)$/i,
+        test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
             loader: 'file-loader',

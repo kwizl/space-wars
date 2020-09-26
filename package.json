@@ -40,6 +40,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "enable3d": "^0.19.1",
     "phaser": "^3.24.1"
   }
 }
