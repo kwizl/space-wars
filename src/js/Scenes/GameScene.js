@@ -12,23 +12,36 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('asteriod2', 'assets/asteriods/asteriod_2.png');
     this.load.image('asteriod3', 'assets/asteriods/asteriod_3.png');
 
-    this.load.image('enemy1', 'assets/enemies/enemy.png');
-    this.load.image('enemy2', 'assets/enemies/enemy.png');
+    this.load.image('enemy1', 'assets/enemy/enemy.png');
+    this.load.image('enemy2', 'assets/enemy/enemy.png');
   }
 
   create() {
     this.bg = this.add.tileSprite(400, 300, 800, 600, 'background');
+    this.add.image(400, 300, 'enemy').setScale(0.02);
+
+    this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+    this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+    this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+    this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+    this.keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
     const asteriods = this.physics.add.group();
     const enemies = this.physics.add.group();
 
     const asteriodList = ['asteriod1', 'asteriod2', 'asteriod3'];
-    const asteriodList = ['enemy1', 'enemy2'];
+    const enemyList = ['enemy1', 'enemy2'];
 
     const asteriodGen = () => {
       const xCoord = Math.random() * 600;
       let randomasteriod = asteriodList[Math.floor(Math.random() * 3)];
       asteriods.create(xCoord, -50, randomasteriod);
+    };
+
+    const enemyGen = () => {
+      const xCoord = Math.random() * 600;
+      let randomenemy = enemyList[Math.floor(Math.random() * 2)];
+      enemies.create(xCoord, -50, randomenemy);
     };
 
     this.time.addEvent({
@@ -39,8 +52,8 @@ export default class GameScene extends Phaser.Scene {
     });
 
     this.time.addEvent({
-      delay: 2200,
-      callback: asteriodGen,
+      delay: 3300,
+      callback: enemyGen,
       callbackScope: this,
       loop: true,
     });
