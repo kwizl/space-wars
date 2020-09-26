@@ -16,7 +16,15 @@ module.exports = {
       {
         test: [ /\.vert$/, /\.frag$/ ],
         use: 'raw-loader'
-      }
+      },
+      {
+        test: /\.(png|jpe?g|gif|tga)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
     ]
   },
 
