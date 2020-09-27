@@ -1,5 +1,6 @@
 import 'phaser';
 
+const gameState = { score: 0 }
 export default class GameScene extends Phaser.Scene {
   constructor () {
     super('Game');
@@ -12,12 +13,19 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('asteriod2', 'assets/asteriods/asteriod_2.png');
     this.load.image('asteriod3', 'assets/asteriods/asteriod_3.png');
 
+    this.load.image('player', 'assets/player/player.png');
+
     this.load.image('enemy1', 'assets/enemy/enemy.png');
     this.load.image('enemy2', 'assets/enemy/enemy.png');
   }
 
   create() {
     this.bg = this.add.tileSprite(400, 300, 800, 600, 'background');
+    
+    gameState.player = this.physics.add.sprite(225, 450, 'player').setScale(0.5);
+    gameState.player.setCollideWorldBounds(true);
+    gameState.cursors = this.input.keyboard.createCursorKeys();
+
     this.add.image(400, 300, 'enemy').setScale(0.02);
 
     this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
@@ -61,5 +69,17 @@ export default class GameScene extends Phaser.Scene {
 
   update() {
     this.bg.tilePositionY -= 0.3;
+
+    if (gameState.cursors.left.isDown) {
+      gameState.player.setVelocityX(-120);
+    } else if (gameState.cursors.right.isDown) {
+      gameState.player.setVelocityX(120);
+    } else if (gameState.cursors.up.isDown) {
+      gameState.player.setVelocityY(-120);
+    } else if (gameState.cursors.down.isDown) {
+      gameState.player.setVelocityY(120);
+    } else {
+      gameState.player.setVelocityX(0);
+    }
   }
 };
