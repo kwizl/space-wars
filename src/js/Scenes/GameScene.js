@@ -19,28 +19,42 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('enemy2', 'assets/enemy/enemy.png');
   }
 
+  gameOver() {
+    this.physics.pause();
+
+    this.add.text(300, 250, 'Game Over', {
+      fontSize: '30px',
+      fontWeight: '700',
+      fill: '#333',
+    });
+
+    this.add.text(300, 270, 'Click to Restart', {
+      fontSize: '30px',
+      fontWeight: '700',
+      fill: '#333',
+    });
+
+    this.input.on('pointerup', () => {
+      gameState.score = 0;
+      this.scene.restart();
+    });
+  }
+
   create() {
     this.bg = this.add.tileSprite(400, 300, 800, 600, 'background');
-    
-    gameState.player = this.physics.add.sprite(225, 450, 'player').setScale(0.5);
+    this.add.image(400, 300, 'enemy').setScale(0.02);
+
+    gameState.player = this.physics.add.sprite(225, 450, 'player');
     gameState.player.setGravity(0, 0);
     gameState.player.setCollideWorldBounds(true);
     gameState.cursors = this.input.keyboard.createCursorKeys();
-
-    this.add.image(400, 300, 'enemy').setScale(0.02);
-
-    this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-    this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-    this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-    this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-    this.keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-
+  
     const asteriods = this.physics.add.group();
     const enemies = this.physics.add.group();
 
     const asteriodList = ['asteriod1', 'asteriod2', 'asteriod3'];
     const enemyList = ['enemy1', 'enemy2'];
-
+    
     const asteriodGen = () => {
       const xCoord = Math.random() * 600;
       let randomasteriod = asteriodList[Math.floor(Math.random() * 3)];
@@ -53,6 +67,20 @@ export default class GameScene extends Phaser.Scene {
       enemies.create(xCoord, -50, randomenemy);
     };
 
+    const asteriodGenLoop = this.time.addEvent({
+      delay: 2200,
+      callback: asteriodGen,
+      callbackScope: this,
+      loop: true,
+    });
+
+    const enemyGenLoop = this.time.addEvent({
+      delay: 3300,
+      callback: enemyGen,
+      callbackScope: this,
+      loop: true,
+    });
+  
     this.time.addEvent({
       delay: 2200,
       callback: asteriodGen,
@@ -65,6 +93,20 @@ export default class GameScene extends Phaser.Scene {
       callback: enemyGen,
       callbackScope: this,
       loop: true,
+    });
+
+    this.physics.add.collider(gameState.player, asteriods, () => {
+      asteriodGenLoop.destroy();
+      enemyGenLoop.destroy();
+      
+      this.gameOver();
+    });
+
+    this.physics.add.collider(gameState.player, enemies, () => {
+      asteriodGenLoop.destroy();
+      enemyGenLoop.destroy();
+      
+      this.gameOver();
     });
   }
 
