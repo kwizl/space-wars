@@ -1,8 +1,8 @@
-import 'phaser';
+import Phaser from 'phaser';
 import Button from '../Objects/Button';
 
 export default class OptionsScene extends Phaser.Scene {
-  constructor () {
+  constructor() {
     super('Options');
   }
 
@@ -53,4 +53,4 @@ export default class OptionsScene extends Phaser.Scene {
       this.soundButton.setTexture('checkedBox');
     }
   }
-};
+}

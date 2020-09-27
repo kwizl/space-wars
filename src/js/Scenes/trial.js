@@ -1,28 +1,28 @@
 class GameScene extends Phaser.Scene {
   constructor() {
-    super({ key: "GameScene" });
+    super({ key: 'GameScene' });
   }
 
   preload() {
     this.load.image(
-      "bug1",
-      "https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_1.png"
+      'bug1',
+      'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_1.png',
     );
     this.load.image(
-      "bug2",
-      "https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_2.png"
+      'bug2',
+      'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_2.png',
     );
     this.load.image(
-      "bug3",
-      "https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_3.png"
+      'bug3',
+      'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_3.png',
     );
     this.load.image(
-      "platform",
-      "https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/platform.png"
+      'platform',
+      'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/platform.png',
     );
     this.load.image(
-      "codey",
-      "https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/codey.png"
+      'codey',
+      'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/codey.png',
     );
   }
 
@@ -31,11 +31,11 @@ class GameScene extends Phaser.Scene {
 
     const platforms = this.physics.add.staticGroup();
 
-    platforms.create(225, 490, "platform").setScale(1, 0.3).refreshBody();
+    platforms.create(225, 490, 'platform').setScale(1, 0.3).refreshBody();
 
-    gameState.scoreText = this.add.text(195, 485, "Score: 0", {
-      fontSize: "15px",
-      fill: "#000000",
+    gameState.scoreText = this.add.text(195, 485, 'Score: 0', {
+      fontSize: '15px',
+      fill: '#000000',
     });
 
     gameState.player.setCollideWorldBounds(true);
@@ -46,11 +46,11 @@ class GameScene extends Phaser.Scene {
 
     const bugs = this.physics.add.group();
 
-    const bugList = ["bug1", "bug2", "bug3"];
+    const bugList = ['bug1', 'bug2', 'bug3'];
 
     const bugGen = () => {
       const xCoord = Math.random() * 640;
-      let randomBug = bugList[Math.floor(Math.random() * 3)];
+      const randomBug = bugList[Math.floor(Math.random() * 3)];
       bugs.create(xCoord, 10, randomBug);
     };
 
@@ -61,7 +61,7 @@ class GameScene extends Phaser.Scene {
       loop: true,
     });
 
-    this.physics.add.collider(bugs, platforms, function (bug) {
+    this.physics.add.collider(bugs, platforms, (bug) => {
       bug.destroy();
       gameState.score += 10;
       gameState.scoreText.setText(`Score: ${gameState.score}`);
@@ -70,16 +70,16 @@ class GameScene extends Phaser.Scene {
     this.physics.add.collider(gameState.player, bugs, () => {
       bugGenLoop.destroy();
       this.physics.pause();
-      this.add.text(180, 250, "Game Over", {
-        fontSize: "15px",
-        fill: "#000000",
+      this.add.text(180, 250, 'Game Over', {
+        fontSize: '15px',
+        fill: '#000000',
       });
-      this.add.text(152, 270, "Click to Restart", {
-        fontSize: "15px",
-        fill: "#000000",
+      this.add.text(152, 270, 'Click to Restart', {
+        fontSize: '15px',
+        fill: '#000000',
       });
 
-      this.input.on("pointerup", () => {
+      this.input.on('pointerup', () => {
         gameState.score = 0;
         this.scene.restart();
       });
