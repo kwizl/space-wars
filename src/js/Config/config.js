@@ -11,7 +11,7 @@ export default {
   physics: {
 		default: 'arcade',
 		arcade: {
-			gravity: { x: 0, y: 0 },
+			gravity: { y: 33 },
 			enableBody: true,
 		}
 	}

@@ -23,6 +23,7 @@ export default class GameScene extends Phaser.Scene {
     this.bg = this.add.tileSprite(400, 300, 800, 600, 'background');
     
     gameState.player = this.physics.add.sprite(225, 450, 'player').setScale(0.5);
+    gameState.player.setGravity(0, 0);
     gameState.player.setCollideWorldBounds(true);
     gameState.cursors = this.input.keyboard.createCursorKeys();
 
@@ -80,6 +81,7 @@ export default class GameScene extends Phaser.Scene {
       gameState.player.setVelocityY(120);
     } else {
       gameState.player.setVelocityX(0);
+      gameState.player.setVelocityY(0);
     }
   }
 };
