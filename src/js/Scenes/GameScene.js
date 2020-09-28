@@ -9,21 +9,6 @@ export default class GameScene extends Phaser.Scene {
     this.laserGroup;
   }
 
-  preload() {
-    this.load.image('background', 'assets/bg.jpg');
-
-    this.load.image('asteriod1', 'assets/asteriods/asteriod_1.png');
-    this.load.image('asteriod2', 'assets/asteriods/asteriod_2.png');
-    this.load.image('asteriod3', 'assets/asteriods/asteriod_3.png');
-
-    this.load.image('player', 'assets/player/player.png');
-
-    this.load.image('player_laser', 'assets/laser/player_laser.png');
-
-    this.load.image('enemy1', 'assets/enemy/enemy.png');
-    this.load.image('enemy2', 'assets/enemy/enemy.png');
-  }
-
   gameOver() {
     this.physics.pause();
 
@@ -107,9 +92,18 @@ export default class GameScene extends Phaser.Scene {
       loop: true,
     });
 
+    this.anims.create({
+      key: 'collisionExplosion',
+      frames: this.anims.generateFrameNumbers('explode', { start: 0, end: 10 }),
+      frameRate: 20,
+      repeat: 0,
+    });
+
     this.physics.add.collider(gameState.player, asteriods, () => {
       asteriodGenLoop.destroy();
       enemyGenLoop.destroy();
+
+      gameState.player.anims.play('collisionExplosion', true);
 
       this.gameOver();
     });
@@ -117,7 +111,6 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(gameState.player, enemies, () => {
       asteriodGenLoop.destroy();
       enemyGenLoop.destroy();
-
 
       this.gameOver();
     });

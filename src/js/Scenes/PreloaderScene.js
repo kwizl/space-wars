@@ -86,6 +86,21 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('box', 'assets/ui/grey_box.png');
     this.load.image('checkedBox', 'assets/ui/blue_boxCheckmark.png');
     this.load.audio('bgMusic', ['assets/audio/music_background.wav']);
+
+    this.load.image('background', 'assets/bg.jpg');
+
+    this.load.image('asteriod1', 'assets/asteriods/asteriod_1.png');
+    this.load.image('asteriod2', 'assets/asteriods/asteriod_2.png');
+    this.load.image('asteriod3', 'assets/asteriods/asteriod_3.png');
+
+    this.load.image('player', 'assets/player/player.png');
+
+    this.load.image('player_laser', 'assets/laser/player_laser.png');
+
+    this.load.image('enemy1', 'assets/enemy/enemy.png');
+    this.load.image('enemy2', 'assets/enemy/enemy.png');
+
+    this.load.spritesheet('explode', 'assets/explosions/explosion.png', { frameWidth: 196, frameHeight: 190 });
   }
 
   ready() {
