@@ -92,6 +92,11 @@ export default class GameScene extends Phaser.Scene {
       loop: true,
     });
 
+    gameState.scoreText = this.add.text(20, 0, 'Score: 0', {
+      fontSize: '18px',
+      fill: '#dcdcdc',
+    });
+
     this.anims.create({
       key: 'collisionExplosion',
       frames: this.anims.generateFrameNumbers('explode', { start: 0, end: 10 }),
@@ -126,12 +131,18 @@ export default class GameScene extends Phaser.Scene {
       this.gameOver();
     });
 
-    this.physics.add.collider(enemies, this.laserGroup, (enemy) => {
-      enemy.destroy();    
+    this.physics.add.collider(enemies, this.laserGroup, (enemy, laser) => {
+      enemy.destroy();
+      laser.destroy();
+      gameState.score += 20;
+      gameState.scoreText.setText(`Score: ${gameState.score}`);
     });
 
-    this.physics.add.collider(asteriods, this.laserGroup, (asteriod) => {
-      asteriod.destroy();    
+    this.physics.add.collider(asteriods, this.laserGroup, (asteriod, laser) => {
+      asteriod.destroy();
+      laser.destroy();
+      gameState.score += 5;
+      gameState.scoreText.setText(`Score: ${gameState.score}`);
     });
   }
 
