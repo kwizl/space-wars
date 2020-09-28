@@ -112,6 +112,8 @@ export default class GameScene extends Phaser.Scene {
       asteriodGenLoop.destroy();
       enemyGenLoop.destroy();
 
+      gameState.player.anims.play('collisionExplosion', true);
+
       this.gameOver();
     });
   }
