@@ -1,10 +1,12 @@
 import Phaser from 'phaser';
+import LaserGroup from '../Objects/LaserGroup';
 
 const gameState = { score: 0 };
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
+    this.laserGroup;
   }
 
   preload() {
@@ -15,6 +17,8 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('asteriod3', 'assets/asteriods/asteriod_3.png');
 
     this.load.image('player', 'assets/player/player.png');
+
+    this.load.image('player_laser', 'assets/laser/player_laser.png');
 
     this.load.image('enemy1', 'assets/enemy/enemy.png');
     this.load.image('enemy2', 'assets/enemy/enemy.png');
@@ -41,14 +45,21 @@ export default class GameScene extends Phaser.Scene {
     });
   }
 
+  shootLaser() {
+    this.laserGroup.fireLaser(gameState.player.x, gameState.player.y - 20);
+  }
+
   create() {
     this.bg = this.add.tileSprite(400, 300, 800, 600, 'background');
     this.add.image(400, 300, 'enemy').setScale(0.02);
 
-    gameState.player = this.physics.add.sprite(225, 450, 'player');
+    this.laserGroup = new LaserGroup(this);
+
+    gameState.player = this.physics.add.sprite(300, 450, 'player');
     gameState.player.setGravity(0, 0);
     gameState.player.setCollideWorldBounds(true);
     gameState.cursors = this.input.keyboard.createCursorKeys();
+    gameState.fire = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
 
     const asteriods = this.physics.add.group();
     const enemies = this.physics.add.group();
@@ -123,6 +134,8 @@ export default class GameScene extends Phaser.Scene {
       gameState.player.setVelocityY(-120);
     } else if (gameState.cursors.down.isDown) {
       gameState.player.setVelocityY(120);
+    } else if (gameState.fire.isDown) {
+      this.shootLaser();
     } else {
       gameState.player.setVelocityX(0);
       gameState.player.setVelocityY(0);
