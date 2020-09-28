@@ -126,9 +126,8 @@ export default class GameScene extends Phaser.Scene {
       this.gameOver();
     });
 
-    this.physics.add.collider(enemies, this.laserGroup, (enemyr) => {
-      enemy.destroy();
-      this.laserGroup.destroy();     
+    this.physics.add.collider(enemies, this.laserGroup, () => {
+      enemy.destroy();    
     });
   }
 
