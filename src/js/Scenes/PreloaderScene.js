@@ -10,7 +10,12 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   preload() {
-    this.add.image(400, 200, 'logo');
+    this.add.text(350, 20, 'SPACE WWARS', {
+      fontSize: '20px',
+      fill: '#dcdcdc',
+    });
+  
+    this.add.image(400, 300, 'logo');
 
     const progressBar = this.add.graphics();
     const progressBox = this.add.graphics();

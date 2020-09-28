@@ -8,6 +8,8 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   create() {
+    this.add.tileSprite(400, 300, 800, 600, 'background');
+    
     this.gameButton = new Button(this, config.width / 2, config.height / 4 - 100, 'blueButton1', 'blueButton2', 'Play', 'Game');
 
     this.optionsButton = new Button(this, config.width / 2, config.height / 4, 'blueButton1', 'blueButton2', 'Options', 'Options');
