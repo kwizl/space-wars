@@ -1,46 +1,42 @@
 # SPACE WARS
 
-A javascript arcade space-shooter made on Phaser 3.
+Space Wars is a javascript arcade space-shooter made using the Phaser 3 Framework.
 
-![game demo](/assets/jsAsteroidsDemo.gif)
+![game demo]()
 
 # Live version
-You can find a live version of the game [here](https://js-asteroids.netlify.app/)
+You can find a live version of the game [here]()
 
 ## Overview
-Space Wars is a real-time shooting game with an overhead view. The objective of the game is to destroy as many asteroids as possible without getting hit by debris, or crashing into obstacles.
-
-The ship is controlled by thrusting forwards or backward, and turning the ship left or right with either the WASD or cursor keys. The player can also shoot lasers at asteroids or debris by pressing the spacebar.
+The goal of the game is to destroy as man enemies and asteroids as possible without getting killed. When the player shots an enemy they get 20 points on their score while shooting and asteroid is 5 points. You can control the spaceship is controlled by moving the arrow keys up, down, right and left to move as desired. To shot the lasers at the enmeies or asteroids press the keyboard key F.
 
 ## Design overview
 
-The initial design for the game was much more focused on the shooting mechanics, rather than the handling and maneuvering of the ship. It was initially planned to include features such as enemy ships and player powerups scattered throughout the map that would, for instance, speed up the player's spaceship or enhance its projectiles. However, after starting to implement the basic functionality for player movement, it became apparent that the movement itself and the handling of the ship introduced its own layer of difficulty to the game, and adding enemy spaceships would make the game too difficult and frustrating for the player.
+The initial design for the game was meant to be a much more manuevering game while shooting. The movement of the player spaceship, enemy spaceship and the asteroids had to be restrained to the y-axis since having them move across the screen became would bring alot of complexity to the player experience.
 
 ### Obstacles
-And so, the design shifter in favor of obstacles being the main difficulty the player would have to overcome. The initial design only contemplated having static asteroids as obstacles. After a few iterations on this initial design, it was decided to make asteroids a bit less static by imprinting a very subtle initial speed they're created, that that they would wander around the map and incentivize the player to also move around the map.
-This addition worked out well in incentivizing the player to move around the map, but the gameplay still felt too easy and simple. Another layer or difficulty was required. To this end, asteroids were modified so that when the player shot them, four pieces of debris would fly out in different directions at relatively high speeds, giving the player another reason to keep moving.
+The obstacles that the player has to encounter are the enemy spaceships and the asteroids. The asteroids and the spaceships fall across the screen towards the player. The player has to destroy them by firing lasers or avoid getting hit by them.
 
 ### Future additions
-At this point the game is in a playable state, which does not mean it's in its final state. Some of the initial designs are still being considered for implementation.
-One such example is player powerups. They could introduce a way of keeping the base gameplay loop of becoming stale too quickly, and it would be a fun way to introduce some variance in player experience. Enemy ships are not being considered at the moment.
+Future additions may include addition of game levels with the player fighting the main enemy at the end of each level. There would also be a choice in the options scene for setting the level of defficulty for the game.
 
 ### Feedback
-If you'd like to see a new feature introduced to the game, or if you feel like the game is not fun or rewarding enough, please provide such feedback through the issues page for this project, or through the social media accounts linked at the bottom of this file. Any feedback would be greatly appreciated, as the objective of the project is to make this game as fun as it can be for as many people as possible.
+If there is a new feature that you feel should be incoperated into the game, you can reach me via the contacts below.
 
-## Running the game
-You can always run the game through the live version linked on a previous section. But if you'd like to run the game locally, follow the instructions below:
+#### Get a local copy
+Now you need a copy of this application, if you are using Git, enter the following commands:
+```js
+git clone git@github.com:kwizl/space-shooter.git
+```
+Otherwise just hit (Download Zip) on green button (Clone or Download) at top of this page.
 
-### Getting the files
-First, you need to have the files on your computer. You can get them by either cloning this repository, or downloading its contents directly
-- To clone the repository, go on the project's [Github page](https://github.com/ivanid22/js-spaceships/tree/game), click on "Clone or download", copy the contents of the text box, and then run `git clone "repo"` on the command line, where "repo" is the text you just copied.
-- If you want to download it directly instead, go on the project's [Github page](https://github.com/ivanid22/js-spaceships/tree/game), click on "Clone or download", and then on "Download ZIP". After this, you need to extract the contents of the zip file on your computer.
+#### Run App
 
-### Installing dependencies
-Now you need to open a terminal and navigate to the project's directory. Once there, run the command `npm install`. This is going to fetch and install all the dependencies for the game. 
-
-### Running the game
-Once that's done, run the command 
-`npm run start`. That should open a new browser window with the game. If the browser does not open, do it manually, paste this on the url box: `localhost:8080`, and press enter.
+In order to run the App on your browser:
+- Open your command prompt or terminal and navigate inside the downloaded project
+- Type in the terminal `npm install`
+- Type in the terminal `npx webpack` or `npx webpack --watch`
+- Open the `index.html` in the dist folder on your Browser.`
 
 ## Requirements
 - Node.js v14.12.0
