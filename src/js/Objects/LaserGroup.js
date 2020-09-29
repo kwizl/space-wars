@@ -9,8 +9,8 @@ export default class LaserGroup extends Phaser.Physics.Arcade.Group {
       frameQuantity: 30,
       active: false,
       visible: false,
-      key: 'player_laser'
-    })
+      key: 'player_laser',
+    });
   }
 
   fireLaser(x, y) {

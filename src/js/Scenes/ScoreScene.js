@@ -6,10 +6,8 @@ export default class ScoreScene extends Phaser.Scene {
   }
 
   preload() {
-    
   }
 
   create() {
-    
   }
 }

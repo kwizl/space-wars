@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import Player from '../Objects/Player';
 import LaserGroup from '../Objects/LaserGroup';
 
 const gameState = { score: 0 };
@@ -7,6 +8,7 @@ export default class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
     this.laserGroup;
+    this.player;
   }
 
   gameOver() {
@@ -31,7 +33,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   shootLaser() {
-    this.laserGroup.fireLaser(gameState.player.x, gameState.player.y - 20);
+    this.laserGroup.fireLaser(this.player.x, this.player.y - 20);
   }
 
   create() {
@@ -39,10 +41,7 @@ export default class GameScene extends Phaser.Scene {
     this.add.image(400, 300, 'enemy').setScale(0.02);
 
     this.laserGroup = new LaserGroup(this);
-
-    gameState.player = this.physics.add.sprite(300, 450, 'player');
-    gameState.player.setGravity(0, 0);
-    gameState.player.setCollideWorldBounds(true);
+    this.player = new Player(this, 400, 300, 'player');
     gameState.cursors = this.input.keyboard.createCursorKeys();
     gameState.fire = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
 
@@ -104,29 +103,29 @@ export default class GameScene extends Phaser.Scene {
       repeat: 0,
     });
 
-    this.physics.add.collider(gameState.player, asteriods, () => {
+    this.physics.add.collider(this.player, asteriods, () => {
       asteriodGenLoop.destroy();
       enemyGenLoop.destroy();
 
-      gameState.player.anims.play('collisionExplosion', true);
+      this.player.anims.play('collisionExplosion', true);
 
       this.gameOver();
     });
 
-    this.physics.add.collider(gameState.player, enemies, () => {
+    this.physics.add.collider(this.player, enemies, () => {
       asteriodGenLoop.destroy();
       enemyGenLoop.destroy();
 
-      gameState.player.anims.play('collisionExplosion', true);
+      this.player.anims.play('collisionExplosion', true);
 
       this.gameOver();
     });
 
-    this.physics.add.collider(gameState.player, enemies, () => {
+    this.physics.add.collider(this.player, enemies, () => {
       asteriodGenLoop.destroy();
       enemyGenLoop.destroy();
 
-      gameState.player.anims.play('collisionExplosion', true);
+      this.player.anims.play('collisionExplosion', true);
 
       this.gameOver();
     });
@@ -150,18 +149,17 @@ export default class GameScene extends Phaser.Scene {
     this.bg.tilePositionY -= 0.3;
 
     if (gameState.cursors.left.isDown) {
-      gameState.player.setVelocityX(-120);
+      this.player.moveLeft();
     } else if (gameState.cursors.right.isDown) {
-      gameState.player.setVelocityX(120);
+      this.player.moveRight();
     } else if (gameState.cursors.up.isDown) {
-      gameState.player.setVelocityY(-120);
+      this.player.moveUp();
     } else if (gameState.cursors.down.isDown) {
-      gameState.player.setVelocityY(120);
+      this.player.moveDown();
     } else if (gameState.fire.isDown) {
       this.shootLaser();
     } else {
-      gameState.player.setVelocityX(0);
-      gameState.player.setVelocityY(0);
+      this.player.moveStop();
     }
   }
 }
