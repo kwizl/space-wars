@@ -38,8 +38,8 @@ const ScoreApi = () => {
 
   const chooseScores = (scores) => {
     const cut = [];
-    scores.forEach(s => {
-      if ((s.score >= 0) && (s.user.length > 0)) cut.push(s);
+    scores.forEach((item) => {
+      if ((item.score >= 0) && (item.user.length > 0)) cut.push(item);
     });
     return cut;
   };

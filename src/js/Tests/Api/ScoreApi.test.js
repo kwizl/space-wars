@@ -18,4 +18,12 @@ describe('Mock testing API', () => {
     expect(axios.get).toHaveBeenCalled();
     expect(axios.get).toHaveBeenCalledWith(`${url}${key}/scores/`);
   });
+
+  test('Rearrange array', () => {
+    const arr = [34, 55, 66, 44]
+
+    const api = ScoreApi();
+    const result = api.rearrangeResults(arr);
+    expect(result).toEqual([44, 66, 55, 34]);
+  });
 });
