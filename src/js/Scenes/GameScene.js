@@ -109,8 +109,12 @@ export default class GameScene extends Phaser.Scene {
       enemyGenLoop.destroy();
 
       gameState.player.anims.play('collisionExplosion', true);
-
-      this.gameOver();
+      
+      if (gameState.score > 20) {
+        this.scene.start('Name');
+      } else {
+        this.gameOver();
+      }
     });
 
     this.physics.add.collider(gameState.player, enemies, () => {
@@ -119,16 +123,11 @@ export default class GameScene extends Phaser.Scene {
 
       gameState.player.anims.play('collisionExplosion', true);
 
-      this.gameOver();
-    });
-
-    this.physics.add.collider(gameState.player, enemies, () => {
-      asteriodGenLoop.destroy();
-      enemyGenLoop.destroy();
-
-      gameState.player.anims.play('collisionExplosion', true);
-
-      this.gameOver();
+      if (gameState.score > 20) {
+        this.scene.start('Name');
+      } else {
+        this.gameOver();
+      }
     });
 
     this.physics.add.collider(enemies, this.laserGroup, (enemy, laser) => {
