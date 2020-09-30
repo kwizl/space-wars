@@ -21,10 +21,10 @@ export default class LoginScene extends Phaser.Scene {
       fontSize: '22px ',
     });
 
-    const btnWidth = config.width / 2;
-    const btnHeight = config.height / 2;
+    const width = config.width / 2;
+    const height = config.height / 2;
 
-    const element = this.add.dom(btnWidth, btnHeight).createFromCache('nameform');
+    const element = this.add.dom(width, height).createFromCache('nameform');
 
     element.addListener('click');
 

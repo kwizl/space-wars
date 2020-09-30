@@ -10,6 +10,7 @@ import CreditsScene from './Scenes/CreditsScene';
 import ScoreScene from './Scenes/ScoreScene';
 import NameScene from './Scenes/NameScene';
 import Model from './Model';
+import Api from './Api/ScoreApi';
 
 class Game extends Phaser.Game {
   constructor() {
@@ -30,3 +31,5 @@ class Game extends Phaser.Game {
 }
 
 window.game = new Game();
+ const app = new Api()
+ app.getResult();
