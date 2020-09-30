@@ -1,42 +1,63 @@
 import axios from 'axios';
-import 'regenerator-runtime/runtime';
 
-export default class ScoreApi {
-  constructor(key) {
-    this.key = 'ZomxrkxLhhvvo2nuWmNk';
-  }
+const ScoreApi = () => {
+  const key = 'ZomxrkxLhhvvo2nuWmNk';
 
-  async postResults(name, score) {
-    axios.post(`https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${this.key}/scores/`, {
-      user: name,
-      score: score,
-    }).catch((err) => {
-      alert('Request failed');
+  const getResults = () => new Promise((resolve, reject) => {
+    const url = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${key}/scores/`;
+    axios.get(url).then((res) => {
+      resolve(res.data.result);
+    }).catch((error) => {
+      reject(error.message);
     });
-  }
+  });
 
-  async getResults() {
-    const response = await fetch(`https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${this.key}/scores/`, { mode: 'cors' });
-    const data = await response.json();
-    return data.result;
-  }
-
-  async getResult() {
-    const response = await fetch(`https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${this.key}/scores/`, { mode: 'cors' });
-    const data = await response.json();
-    const re = data.result;
-    re.forEach(el => {
-      console.log(el)
+  const postResults = (user, score) => new Promise((resolve, reject) => {
+    const url = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${key}/scores/`;
+    axios.post(url, { user, score }).then((res) => {
+      resolve(res.data.result);
+    }).catch((error) => {
+      reject(error);
     });
-  }
+  });
 
-  // async getResults() {
-  //   try {
-  //     const response = await axios.get(`https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${this.key}/scores/`, { mode: 'cors' });
-  //     const scores = await response.data.result;
-  //     return scores;
-  //   } catch (error) {
-  //     alert('Request failed');
-  //   }
-  // }
-}
+  const rearrangeResults = (data) => {
+    const len = data.length;
+    const arr = [...data];
+    for (let i = 0; i < len; i += 1) {
+      for (let j = 0; j < len - i - 1; j += 1) {
+        if (arr[j].score > arr[j + 1].score) {
+          const temp = arr[j];
+          arr[j] = arr[j + 1];
+          arr[j + 1] = temp;
+        }
+      }
+    }
+    return [...arr].reverse();
+  };
+
+  const chooseScores = (scores) => {
+    const cut = [];
+    scores.forEach(s => {
+      if ((s.score >= 0) && (s.user.length > 0)) cut.push(s);
+    });
+    return cut;
+  };
+
+  const topScores = (idx, scores) => {
+    let ts = rearrangeResults(scores);
+    ts = chooseScores(ts);
+    if (ts.length > idx) ts.splice(idx, ts.length - idx);
+    return ts;
+  };
+
+  return {
+    getResults,
+    rearrangeResults,
+    postResults,
+    chooseScores,
+    topScores,
+  };
+};
+
+export default ScoreApi;

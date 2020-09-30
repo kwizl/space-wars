@@ -7,22 +7,30 @@ export default class ScoreScene extends Phaser.Scene {
     super('Score');
   }
 
-  displayData() {
-    this.api = new ScoreApi()
-    const data = this.api.getResults();
-
+  displayData(data) {
+    let jsonString = '';
     data.forEach(el => {
-      console.log(el)
+      jsonString += `\n${el.user}: ${el.score}`;
     });
+    this.header = this.add.text(260, 100, 'Leaderboard Score', { fontSize: '25px', fill: '#a0522d' });
+    this.scores = this.add.text(1, 1, jsonString, { lineSpacing: 20 });
+    Phaser.Display.Align.In.Center(this.header, this.textZone, 0, -250);
+    Phaser.Display.Align.In.Center(this.scores, this.textZone, 0, -50);
   }
 
   create() {
     this.add.tileSprite(400, 300, 800, 600, 'background');
-    this.add.text(260, 100, 'Leaderboard Score', { fontSize: '25px', fill: '#a0522d' });
+    
     this.menuButton = new Button(this, 380, 500, 'blueButton1', 'blueButton2', 'Menu', 'Title');
-    // this.api = new ScoreApi()
-    // const data = this.api.getResults();
+    this.textZone = this.add.zone(400, 300, 800, 600);
 
-    // this.add.text(100, 100, JSON.stringify(data.result[0]));
+    const api = ScoreApi();
+    api.getResults().then((scores) => {
+      const scorelist = api.topScores(5, scores);
+      this.displayData(scorelist);
+    }).catch(() => {
+      const err = this.add.text(1, 1, 'API request failed!');
+      Phaser.Display.Align.In.Center(err, this.textZone);
+    });
   }
 }

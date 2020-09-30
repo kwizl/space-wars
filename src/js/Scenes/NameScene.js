@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import config from '../Config/config';
 
-export default class LoginScene extends Phaser.Scene {
+export default class NameScene extends Phaser.Scene {
   constructor() {
     super('Name');
   }
