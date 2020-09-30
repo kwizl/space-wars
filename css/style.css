@@ -1,4 +1,16 @@
+body {
+  position: relative;
+}
+
 canvas {
   margin-left: calc((100vw - 800) / 2);
-  margin-top: calc((100vh - 640) / 2);;
+  margin-top: calc((100vh - 640) / 2);
+}
+
+.name {
+  position: absolute;
+  color: white;
+  border-bottom: 2px solid white;
+  top: 300px;
+  left: 200px;
 }
