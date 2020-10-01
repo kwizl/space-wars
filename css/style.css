@@ -15,10 +15,6 @@ canvas {
   left: 200px;
 }
 
-body {
-  background-color: #0c0c0c;
-}
-
 #canvas {
   position: relative;
   max-width: 980px;
