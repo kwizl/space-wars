@@ -20,7 +20,7 @@ export default class ScoreScene extends Phaser.Scene {
 
   create() {
     this.add.tileSprite(400, 300, 800, 600, 'background');
-    
+
     this.menuButton = new Button(this, 380, 500, 'blueButton1', 'blueButton2', 'Menu', 'Title');
     this.textZone = this.add.zone(400, 300, 800, 600);
 

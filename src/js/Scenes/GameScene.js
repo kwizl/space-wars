@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import Phaser from 'phaser';
 import ScoreApi from '../Api/ScoreApi';
 import LaserGroup from '../Objects/LaserGroup';
@@ -7,30 +8,6 @@ const gameState = { score: 0 };
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
-    this.laserGroup;
-  }
-
-  gameOver() {
-    this.physics.pause();
-
-    this.add.text(300, 220, 'Game Over', {
-      fontSize: '30px',
-      fontWeight: '700',
-      color: 'white',
-      fill: '#333',
-    });
-
-    this.add.text(280, 270, 'Click to Restart', {
-      fontSize: '30px',
-      fontWeight: '700',
-      color: 'white',
-      fill: '#333',
-    });
-
-    this.input.on('pointerup', () => {
-      gameState.score = 0;
-      this.scene.restart();
-    });
   }
 
   shootLaser() {
@@ -109,16 +86,19 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(gameState.player, asteriods, () => {
       asteriodGenLoop.destroy();
       enemyGenLoop.destroy();
-      
+
       const api = ScoreApi();
       api.getResults().then((scores) => {
         this.inputField = document.getElementById('name');
         const topScores = api.topScores(5, scores);
         if (topScores[topScores.length - 1].score < gameState.score) {
           this.scene.start('Name');
+          this.scene.stop('Game');
           gameState.topScore = gameState.score;
         } else {
+          this.scene.stop('Game');
           this.scene.start('Title');
+          gameState.score = 0;
         }
       }).catch(() => {
         this.scene.start('Title');
@@ -137,9 +117,12 @@ export default class GameScene extends Phaser.Scene {
         const topScores = api.topScores(5, scores);
         if (topScores[topScores.length - 1].score < gameState.score) {
           gameState.topScore = gameState.score;
+          this.scene.stop('Game');
           this.scene.start('Name');
         } else {
+          this.scene.stop('Game');
           this.scene.start('Title');
+          gameState.score = 0;
         }
       }).catch(() => {
         this.scene.start('Title');

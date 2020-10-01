@@ -33,10 +33,9 @@ export default class NameScene extends Phaser.Scene {
       if (!this.scoreValue) {
         const api = ScoreApi();
         api.postResults(this.inputField.value, game.gameScore()).then(() => {
-          this.scene.start('Title');
+          this.scene.start('Score');
         }).catch(() => {
           this.scene.start('Title');
-          alert('Failed to submit name!');
         });
       }
       this.scoreValue = true;

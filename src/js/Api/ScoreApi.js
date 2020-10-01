@@ -14,7 +14,7 @@ const ScoreApi = () => {
 
   const postResults = (user, score) => new Promise((resolve, reject) => {
     const url = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${key}/scores/`;
-    axios.post(url,{ user, score }).then((res) => {
+    axios.post(url, { user, score }).then((res) => {
       resolve(res.data.result);
     }).catch((error) => {
       reject(error);

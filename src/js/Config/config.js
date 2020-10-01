@@ -13,6 +13,6 @@ export default {
     },
   },
   dom: {
-    createContainer: true
+    createContainer: true,
   },
 };
