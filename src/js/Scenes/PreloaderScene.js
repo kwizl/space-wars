@@ -92,16 +92,15 @@ export default class PreloaderScene extends Phaser.Scene {
 
     this.load.image('background', 'assets/bg.jpg');
 
-    this.load.image('asteriod1', 'assets/asteriods/asteriod_1.png');
-    this.load.image('asteriod2', 'assets/asteriods/asteriod_2.png');
-    this.load.image('asteriod3', 'assets/asteriods/asteriod_3.png');
+    this.load.image('asteriod1', 'assets/asteriods/asteroid_1.png');
+    this.load.image('asteriod2', 'assets/asteriods/asteroid_2.png');
+    this.load.image('asteriod3', 'assets/asteriods/asteroid_3.png');
 
-    this.load.image('player', 'assets/player/player.png');
+    this.load.image('player', 'assets/player/player_one.png');
 
     this.load.image('player_laser', 'assets/laser/player_laser.png');
 
-    this.load.image('enemy1', 'assets/enemy/enemy.png');
-    this.load.image('enemy2', 'assets/enemy/enemy.png');
+    this.load.image('enemy', 'assets/enemy/enemy_one.png');
 
     this.load.spritesheet('explode', 'assets/explosions/explosion.png', { frameWidth: 196, frameHeight: 190 });
   }

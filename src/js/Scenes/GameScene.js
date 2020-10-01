@@ -39,11 +39,11 @@ export default class GameScene extends Phaser.Scene {
 
   create() {
     this.bg = this.add.tileSprite(400, 300, 800, 600, 'background');
-    this.add.image(400, 300, 'enemy').setScale(0.02);
+    this.add.image(400, 300, 'enemy').setScale(0.2);
 
     this.laserGroup = new LaserGroup(this);
 
-    gameState.player = this.physics.add.sprite(300, 450, 'player');
+    gameState.player = this.physics.add.sprite(300, 450, 'player').setScale(0.2);
     gameState.player.setGravity(0, 0);
     gameState.player.setCollideWorldBounds(true);
     gameState.cursors = this.input.keyboard.createCursorKeys();
@@ -53,7 +53,7 @@ export default class GameScene extends Phaser.Scene {
     const enemies = this.physics.add.group();
 
     const asteriodList = ['asteriod1', 'asteriod2', 'asteriod3'];
-    const enemyList = ['enemy1', 'enemy2'];
+    const enemyList = ['enemy'];
 
     const asteriodGen = () => {
       const xCoord = Math.random() * 600;

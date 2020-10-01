@@ -6,7 +6,7 @@ export default class LaserGroup extends Phaser.Physics.Arcade.Group {
     super(scene.physics.world, scene);
     this.createMultiple({
       classType: Laser,
-      frameQuantity: 30,
+      frameQuantity: 10000,
       active: false,
       visible: false,
       key: 'player_laser',
@@ -14,7 +14,7 @@ export default class LaserGroup extends Phaser.Physics.Arcade.Group {
   }
 
   fireLaser(x, y) {
-    const laser = this.getFirstDead(false);
+    const laser = this.getFirstDead(true);
 
     if (laser) {
       laser.fire(x, y);

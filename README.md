@@ -2,7 +2,6 @@
 
 Space Wars is a javascript arcade space-shooter made using the Phaser 3 Framework.
 
-![game demo]()
 
 # Live version
 You can find a live version of the game [here]()
@@ -45,10 +44,11 @@ In order to run the App on your browser:
 ## Acknowledgements and credits
 This game uses 100% free and open assets thanks to the community over at [OpenGameArt](https://opengameart.org/). Here are the authors of the assets used in this game:
 
-- [Jan125](https://opengameart.org/users/jan125), Game music.
-- [Tatermand](https://opengameart.org/users/tatermand), Game sprites and background
+- [Unity Store](), Game music.
+- [para](https://opengameart.org/content/low-poly-rocks), Asteroid
 - [Bleed](https://opengameart.org/users/bleed), Explosion animation.
 - [Rawdanitsu](https://opengameart.org/users/rawdanitsu), Laser sprite.
+- [MillionthVector](https://opengameart.org/content/set-faction5-spaceships)
 
 ## Author
 
