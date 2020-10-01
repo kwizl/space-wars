@@ -42,7 +42,7 @@ In order to run the App on your browser:
 - npm 6.14.8
 
 ## Acknowledgements and credits
-This game uses 100% free and open assets thanks to the community over at [OpenGameArt](https://opengameart.org/). Here are the authors of the assets used in this game:
+This game uses 100% free and open assets thanks to the community over at **OpenGameArt** and **Unity Store**. Here are the authors of the assets used in this game:
 
 - [Unity Store](), Game music.
 - [para](https://opengameart.org/content/low-poly-rocks), Asteroid
