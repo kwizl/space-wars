@@ -14,3 +14,29 @@ canvas {
   top: 300px;
   left: 200px;
 }
+
+body {
+  background-color: #0c0c0c;
+}
+
+#canvas {
+  position: relative;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+#name {
+  position: absolute;
+  top: 235px;
+  left: 175px;
+  min-width: 150px;
+  height: 30px;
+  border-style: none;
+  color: black;
+  font-size: 16px;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
