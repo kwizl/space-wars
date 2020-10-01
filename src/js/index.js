@@ -29,4 +29,12 @@ class Game extends Phaser.Game {
   }
 }
 
+const input = document.createElement('input');
+const canvas = document.getElementById('canvas');
+input.classList.add('hidden');
+input.id = 'name';
+input.setAttribute('type', 'text');
+input.placeholder = 'Name';
+canvas.appendChild(input);
+
 window.game = new Game();

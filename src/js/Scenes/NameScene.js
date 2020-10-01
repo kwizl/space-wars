@@ -1,50 +1,45 @@
 import Phaser from 'phaser';
-import config from '../Config/config';
+import ScoreApi from '../Api/ScoreApi';
+import GameScene from './GameScene';
 
 export default class NameScene extends Phaser.Scene {
   constructor() {
     super('Name');
   }
 
-  preload() {
-    this.load.html('nameform', 'assets/form.html');
+  displayFields() {
+    const display = this.add.zone(400, 300, 800, 600);
+    const title = this.add.text(1, 1, 'You got a high score!\nEnter your name and press Enter', { fontSize: 20 });
+    Phaser.Display.Align.In.Center(title, display, 0, -200);
+    this.inputField = document.getElementById('name');
+    this.inputField.classList.remove('hidden');
+    this.inputField.focus();
   }
 
   create() {
-    this.add.text(210, 100, 'You are one of the Top 5 Players', {
-      color: 'white',
-      fontSize: '26px ',
-    });
+    this.bg = this.add.tileSprite(400, 300, 800, 600, 'background');
+    this.enterKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+    this.scoreValue = false;
 
-    const text = this.add.text(300, 130, 'Please Enter Name', {
-      color: 'white',
-      fontSize: '22px ',
-    });
+    this.displayFields();
+  }
 
-    const width = config.width / 2;
-    const height = config.height / 2;
-
-    const element = this.add.dom(width, height).createFromCache('nameform');
-
-    element.addListener('click');
-
-    element.on('click', function (event) {
-      if (event.target.name === 'btnSubmit') {
-        const playerName = this.getChildByName('name');
-
-        if (playerName.value !== '') {
-          this.removeListener('click');
-          this.scene.sys.scenePlugin.start('Title');
-        } else {
-          this.scene.tweens.add({
-            targets: text,
-            alpha: 0.1,
-            duration: 200,
-            ease: 'Power3',
-            yoyo: true,
-          });
-        }
+  update() {
+    const game = new GameScene();
+    if (this.enterKey.isDown && (this.inputField.nodeValue !== '')) {
+      this.inputField = document.getElementById('name');
+      this.inputField.classList.add('hidden');
+      this.input.keyboard.removeAllListeners();
+      if (!this.scoreValue) {
+        const api = ScoreApi();
+        api.postResults(this.inputField.value, game.gameScore()).then(() => {
+          this.scene.start('Title');
+        }).catch(() => {
+          this.scene.start('Title');
+          alert('Failed to submit name!');
+        });
       }
-    });
+      this.scoreValue = true;
+    }
   }
 }

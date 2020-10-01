@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import ScoreApi from '../Api/ScoreApi';
 import LaserGroup from '../Objects/LaserGroup';
 
 const gameState = { score: 0 };
@@ -12,15 +13,17 @@ export default class GameScene extends Phaser.Scene {
   gameOver() {
     this.physics.pause();
 
-    this.add.text(300, 250, 'Game Over', {
+    this.add.text(300, 220, 'Game Over', {
       fontSize: '30px',
       fontWeight: '700',
+      color: 'white',
       fill: '#333',
     });
 
-    this.add.text(300, 270, 'Click to Restart', {
+    this.add.text(280, 270, 'Click to Restart', {
       fontSize: '30px',
       fontWeight: '700',
+      color: 'white',
       fill: '#333',
     });
 
@@ -107,27 +110,43 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(gameState.player, asteriods, () => {
       asteriodGenLoop.destroy();
       enemyGenLoop.destroy();
+      
+      const api = ScoreApi();
+      api.getResults().then((scores) => {
+        this.inputField = document.getElementById('name');
+        const topScores = api.topScores(5, scores);
+        if (topScores[topScores.length - 1].score < gameState.score) {
+          this.scene.start('Name');
+          gameState.topScore = gameState.score;
+        } else {
+          this.scene.start('Title');
+        }
+      }).catch(() => {
+        this.scene.start('Title');
+      });
 
       gameState.player.anims.play('collisionExplosion', true);
-      
-      if (gameState.score > 20) {
-        this.scene.start('Name');
-      } else {
-        this.gameOver();
-      }
     });
 
     this.physics.add.collider(gameState.player, enemies, () => {
       asteriodGenLoop.destroy();
       enemyGenLoop.destroy();
 
-      gameState.player.anims.play('collisionExplosion', true);
+      const api = ScoreApi();
+      api.getResults().then((scores) => {
+        this.inputField = document.getElementById('name');
+        const topScores = api.topScores(5, scores);
+        if (topScores[topScores.length - 1].score < gameState.score) {
+          gameState.topScore = gameState.score;
+          this.scene.start('Name');
+        } else {
+          this.scene.start('Title');
+        }
+      }).catch(() => {
+        this.scene.start('Title');
+      });
 
-      if (gameState.score > 20) {
-        this.scene.start('Name');
-      } else {
-        this.gameOver();
-      }
+      gameState.player.anims.play('collisionExplosion', true);
     });
 
     this.physics.add.collider(enemies, this.laserGroup, (enemy, laser) => {
@@ -143,6 +162,10 @@ export default class GameScene extends Phaser.Scene {
       gameState.score += 5;
       gameState.scoreText.setText(`Score: ${gameState.score}`);
     });
+  }
+
+  gameScore() {
+    return gameState.topScore;
   }
 
   update() {
