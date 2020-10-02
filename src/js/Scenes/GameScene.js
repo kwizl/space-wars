@@ -153,6 +153,10 @@ export default class GameScene extends Phaser.Scene {
   update() {
     this.bg.tilePositionY -= 0.3;
 
+    if (gameState.fire.isDown) {
+      this.shootLaser();
+    }
+
     if (gameState.cursors.left.isDown) {
       gameState.player.setVelocityX(-120);
     } else if (gameState.cursors.right.isDown) {
@@ -161,8 +165,6 @@ export default class GameScene extends Phaser.Scene {
       gameState.player.setVelocityY(-120);
     } else if (gameState.cursors.down.isDown) {
       gameState.player.setVelocityY(120);
-    } else if (gameState.fire.isDown) {
-      this.shootLaser();
     } else {
       gameState.player.setVelocityX(0);
       gameState.player.setVelocityY(0);
