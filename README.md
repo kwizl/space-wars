@@ -7,20 +7,20 @@ Space Wars is a javascript arcade space-shooter made using the Phaser 3 Framewor
 Live version of the game [here](https://kwizl.github.io/space-shooter/)
 
 ## Overview
-The goal of the game is to destroy as man enemies and asteroids as possible without getting killed. When the player shots an enemy they get 20 points on their score while shooting and asteroid is 5 points. You can control the spaceship is controlled by moving the arrow keys up, down, right and left to move as desired. To shot the lasers at the enmeies or asteroids press the keyboard key F.
+The goal of the game is to destroy as many enemies and asteroids as possible without getting killed. When the player shoots an enemy they get 20 points on their score while shooting and asteroid is 5 points. The spaceship is controlled by moving the arrow keys up, down, right and left to move as desired. To shoot the lasers at the enmeies or asteroids press the keyboard key F.
 
 ## Design overview
 
-The initial design for the game was meant to be a much more manuevering game while shooting. The movement of the player spaceship, enemy spaceship and the asteroids had to be restrained to the y-axis since having them move across the screen became would bring alot of complexity to the player experience.
+The initial design for the game was meant to be more of manuevering game while shooting. The movement of the player spaceship, enemy spaceship and the asteroids had to be restrained to the y-axis since having them move across the screen in the x axis brought about alot of complexity to the player experience.
 
 ### Obstacles
 The obstacles that the player has to encounter are the enemy spaceships and the asteroids. The asteroids and the spaceships fall across the screen towards the player. The player has to destroy them by firing lasers or avoid getting hit by them. Initially the rocks were meant to be moving haphazardly across the screen. This proved to be too complicated and the time wasn't enough. I was able to implement the rocks to fall from the top of the screen.
 
 ### Future additions
-Future additions may include addition of game levels with the player fighting the main enemy at the end of each level. There would also be a choice in the options scene for setting the level of defficulty for the game.
+Future additions may include addition of game levels with the player fighting the main enemy at the end of each level. There would also be a choice in the options scene for setting the level of difficulty for the game.
 
 ### Feedback
-If there is a new feature that you feel should be incoperated into the game, you can reach me via the contacts below.
+If there is a new feature that you feel should be incorporated into the game, you can reach me via the contacts below.
 
 #### Get a local copy
 Now you need a copy of this application, if you are using Git, enter the following commands:
@@ -34,8 +34,9 @@ Otherwise just hit (Download Zip) on green button (Clone or Download) at top of 
 In order to run the App on your browser:
 - Open your command prompt or terminal and navigate inside the downloaded project
 - Type in the terminal `npm install`
-- Type in the terminal `npx webpack` or `npx webpack --watch`
-- Open the `index.html` in the dist folder on your Browser.`
+- Type in the terminal or `npm run start`
+- Go the url `http://localhost:8000/`
+- Click on the build folder
 
 ## Requirements
 - Node.js v14.12.0
