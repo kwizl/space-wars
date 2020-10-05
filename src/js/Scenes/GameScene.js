@@ -176,6 +176,23 @@ export default class GameScene extends Phaser.Scene {
         player.onDestroy();
         laser.destroy();
       }
+
+      const api = ScoreApi();
+      api.getResults().then((scores) => {
+        this.inputField = document.getElementById('name');
+        const topScores = api.topScores(5, scores);
+        if (topScores[topScores.length - 1].score < gameState.score) {
+          this.scene.start('Name');
+          this.scene.stop('Game');
+          gameState.topScore = gameState.score;
+        } else {
+          this.scene.stop('Game');
+          this.scene.start('Title');
+          gameState.score = 0;
+        }
+      }).catch(() => {
+        this.scene.start('Title');
+      });
     });
   }
 
