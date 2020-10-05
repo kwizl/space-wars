@@ -141,7 +141,7 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(this.playerLasers, this.asteriods, (playerLaser, asteriod) => {
       asteriod.explode(true);
       playerLaser.destroy();
-      gameState.score += 20;
+      gameState.score += 5;
       gameState.scoreText.setText(`Score: ${gameState.score}`);
     });
 
