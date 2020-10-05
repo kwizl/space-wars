@@ -184,17 +184,6 @@ export default class GameScene extends Phaser.Scene {
     return gameState.topScore;
   }
 
-  getEnemiesByType(type) {
-    const arr = [];
-    for (let i = 0; i < this.enemies.getChildren().length; i += 1) {
-      const enemy = this.enemies.getChildren()[i];
-      if (enemy.getData('type') === type) {
-        arr.push(enemy);
-      }
-    }
-    return arr;
-  }
-
   update() {
     this.bg.tilePositionY -= 0.3;
 
