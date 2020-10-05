@@ -1,3 +1,4 @@
+import Phaser from 'phaser';
 import Entity from './Entity';
 import PlayerLaser from './PlayerLaser';
 
@@ -31,11 +32,11 @@ export default class Player extends Entity {
   onDestroy() {
     this.scene.time.addEvent({
       delay: 1000,
-      callback: function() {
+      callback: () => {
         this.scene.scene.start('Title');
       },
       callbackScope: this,
-      loop: false
+      loop: false,
     });
   }
 
@@ -50,7 +51,7 @@ export default class Player extends Entity {
       } else {
         const laser = new PlayerLaser(this.scene, this.x, this.y);
         this.scene.playerLasers.add(laser);
-      
+
         this.scene.sfx.laser.play();
         this.setData('timerShootTick', 0);
       }

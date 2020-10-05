@@ -1,6 +1,7 @@
 /* eslint-disable operator-linebreak */
 import Phaser from 'phaser';
 import Enemy from '../Objects/Enemy';
+import Asteroid from '../Objects/Asteroid';
 import Player from '../Objects/Player';
 import ScoreApi from '../Api/ScoreApi';
 
@@ -56,28 +57,6 @@ export default class GameScene extends Phaser.Scene {
     this.playerLasers = this.add.group();
     this.asteriods = this.physics.add.group();
 
-    const asteriodList = ['asteriod1', 'asteriod2', 'asteriod3'];
-
-    const asteriodGen = () => {
-      const xCoord = Math.random() * 600;
-      const randomasteriod = asteriodList[Math.floor(Math.random() * 3)];
-      this.asteriods.create(xCoord, -40, randomasteriod);
-    };
-
-    const asteriodGenLoop = this.time.addEvent({
-      delay: 2200,
-      callback: asteriodGen,
-      callbackScope: this,
-      loop: true,
-    });
-
-    this.time.addEvent({
-      delay: 2200,
-      callback: asteriodGen,
-      callbackScope: this,
-      loop: true,
-    });
-
     this.time.addEvent({
       delay: 1000,
       callback: () => {
@@ -87,13 +66,35 @@ export default class GameScene extends Phaser.Scene {
           enemy = new Enemy(
             this,
             Phaser.Math.Between(0, this.game.config.width),
-            0,
+            -10,
           );
         }
 
         if (enemy !== null) {
           enemy.setScale(Phaser.Math.Between(10, 20) * 0.1);
           this.enemies.add(enemy);
+        }
+      },
+      callbackScope: this,
+      loop: true,
+    });
+
+    this.time.addEvent({
+      delay: 2300,
+      callback: () => {
+        let asteriod = null;
+
+        if (Phaser.Math.Between(0, 10) >= 3) {
+          asteriod = new Asteroid(
+            this,
+            Phaser.Math.Between(0, this.game.config.width),
+            -40,
+          );
+        }
+
+        if (asteriod !== null) {
+          asteriod.setScale(Phaser.Math.Between(10, 20) * 0.1);
+          this.asteriods.add(asteriod);
         }
       },
       callbackScope: this,
@@ -112,7 +113,7 @@ export default class GameScene extends Phaser.Scene {
       }
     });
 
-    this.physics.add.collider(this.player, this.asteriods, (player) => {
+    this.physics.add.collider(this.player, this.asteriods, (player, asteriod) => {
       if (!player.getData('isDead')) {
         player.explode(false);
         player.onDestroy();
@@ -134,14 +135,13 @@ export default class GameScene extends Phaser.Scene {
       }).catch(() => {
         this.scene.start('Title');
       });
-      asteriodGenLoop.destroy();
+      asteriod.explode(false);
     });
 
     this.physics.add.collider(this.playerLasers, this.asteriods, (playerLaser, asteriod) => {
-      asteriodGenLoop.destroy();
+      asteriod.explode(true);
       playerLaser.destroy();
-      asteriod.destroy();
-      gameState.score += 5;
+      gameState.score += 20;
       gameState.scoreText.setText(`Score: ${gameState.score}`);
     });
 
