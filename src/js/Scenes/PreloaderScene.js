@@ -93,7 +93,7 @@ export default class PreloaderScene extends Phaser.Scene {
 
     this.load.image('background', 'assets/bg.jpg');
 
-    this.load.image('asteriod', 'assets/asteriods/asteroid_1.png');
+    this.load.image('asteriod', 'assets/asteriods/asteroid.png');
 
     this.load.image('player', 'assets/player/player_one.png');
 
