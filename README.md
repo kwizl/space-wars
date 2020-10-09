@@ -10,7 +10,7 @@ Space Wars is a javascript arcade space-shooter made using the Phaser 3 Framewor
 [Live version](https://kwizl.github.io/space-shooter/)
 
 ## Overview
-The goal of the game is to destroy as many enemies and asteroids as possible without getting killed. When the player shoots an enemy they get 20 points on their score while shooting and asteroid is 5 points. The spaceship is controlled by moving the `arrow keys up, down, right and left` to move as desired. To shoot the lasers at the enmeies or asteroids press the keyboard `spacebar`.
+The goal of the game is to destroy as many enemies and asteroids as possible without getting killed. When the player shoots an enemy they get 20 points on their score while shooting and asteroid is 5 points. The spaceship is controlled by moving the `arrow keys up, down, right and left` to move as desired. To shoot the lasers at the enemies or asteroids press the keyboard `spacebar`.
 
 ## Design overview
 
