@@ -51,7 +51,7 @@ This game uses 100% free and open assets thanks to the community over at **OpenG
 - [para](https://opengameart.org/content/low-poly-rocks), Asteroid
 - [Bleed](https://opengameart.org/users/bleed), Explosion animation.
 - [Rawdanitsu](https://opengameart.org/users/rawdanitsu), Laser sprite.
-- [MillionthVector](https://opengameart.org/content/set-faction5-spaceships)
+- [MillionthVector](https://opengameart.org/content/set-faction5-spaceships), Spaceships
 
 ## Author
 
