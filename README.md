@@ -17,7 +17,7 @@ The goal of the game is to destroy as many enemies and asteroids as possible wit
 The initial design for the game is a maneuvering game while shooting. The movement of the player spaceship, enemy spaceship, and the asteroids move along the y-axis since having them move across the screen in the x-axis brought about a lot of complexity to the player experience.
 
 ### Obstacles
-The obstacles that the player has to encounter are the enemy spaceships and the asteroids. The asteroids and the spaceships fall across the screen towards the player. The player has to destroy them by firing lasers or avoid getting hit by them. Initially, the asteroids move haphazardly across the screen. This could not be accomplished since the time was not enough. However I was able to make the asteroids to fall from the top of the screen.
+The obstacles that the player has to encounter are the enemy spaceships and the asteroids. The asteroids and the spaceships fall across the screen towards the player. The player has to destroy them by firing lasers or avoid getting hit by them. Initially, the asteroids move haphazardly across the screen. Accomplishing this was difficult since time was not enough. However, I was able to make the asteroids to fall from the top of the screen.
 
 ### Future additions
 Future additions may include the addition of game levels. There would also be a choice in the options scene for setting the level of difficulty for the game.
@@ -35,9 +35,9 @@ Otherwise, just hit (Download Zip) on the green button (Clone or Download) on th
 #### Run App
 To run the application on your browser:
 - Open your command prompt or terminal and navigate inside the downloaded project
-- Type in the terminal `npm install`
-- Type in the terminal or `npm run start`
-- Go the url `http://localhost:8000/`
+- Type in the terminal: `npm install`
+- Type in the terminal: `npm run start`
+- Go to `http://localhost:8000/`
 - Click on the build folder
 
 ## Requirements
