@@ -6,7 +6,7 @@ Space Wars is a javascript arcade space-shooter made using the Phaser 3 Framewor
 ![screenshot](./build/assets/screenshot.png)
 
 # Live version
-[Live version](https://kwizl.github.io/space-shooter/)
+[Live version](https://kwizl.github.io/space-wars/)
 
 ## Overview
 
