@@ -1,5 +1,5 @@
 # SPACE WARS
-Space Wars is a javascript arcade space-shooter made using the Phaser 3 Framework.
+Space Wars is an arcade space-shooter game made using the Phaser 3 Framework in JavaScript.
 
 # Game
 
