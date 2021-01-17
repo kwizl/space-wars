@@ -6,7 +6,7 @@ Space Wars is an arcade space-shooter game made using the Phaser 3 Framework in 
 ![screenshot](./build/assets/screenshot.png)
 
 # Live version
-[Live version](https://kwizl.github.io/space-wars/)
+[Live version](https://space-shooter-arcade.netlify.app/)
 
 ## Overview
 
